@@ -4,9 +4,11 @@
   "description": "udacity first project nodejs ",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "start:dev": "nodemon",
-    "lint": "eslint . --ext .ts"
+    "prettier": "prettier --config .prettierrc src/**/*.js --write",
+    "lint": "eslint src/**/*.js",
+    "build": "npx tsc",
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine "
   },
   "repository": {
     "type": "git",
