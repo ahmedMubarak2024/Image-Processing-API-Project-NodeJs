@@ -30,4 +30,4 @@ app.get("/api/images", function (req, res) {
   });
 });
 
-export {app}
+export { app };
