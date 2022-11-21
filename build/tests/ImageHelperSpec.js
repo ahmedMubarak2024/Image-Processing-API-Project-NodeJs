@@ -39,7 +39,7 @@ describe("ImageHelper::isCorrectImageSize", () => {
     });
 });
 describe("ImageHelper::resizeImage", () => {
-    const imagesPath = path_1.default.join(__dirname, "..", "..", "images", 'icelandwaterfall.jpg');
+    const imagesPath = path_1.default.join(__dirname, "..", "..", "images", "icelandwaterfall.jpg");
     const thumbnailsPath = path_1.default.join(__dirname, "..", "..", "thumbnails");
     afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
         fs_1.default.rmSync(thumbnailsPath, { recursive: true, force: true });
@@ -49,8 +49,8 @@ describe("ImageHelper::resizeImage", () => {
             fs_1.default.mkdirSync(thumbnailsPath);
         }
     }));
-    it('new cached version should be created ', () => __awaiter(void 0, void 0, void 0, function* () {
-        let cachedFullName = path_1.default.join(thumbnailsPath, 'icelandwaterfall.jpg');
+    it("new cached version should be created ", () => __awaiter(void 0, void 0, void 0, function* () {
+        let cachedFullName = path_1.default.join(thumbnailsPath, "icelandwaterfall.jpg");
         yield (0, ImageHelper_1.resizeImage)(imagesPath, cachedFullName, 60, 60).then(() => {
             expect((0, FileHelpers_1.isCachedVersionExists)(cachedFullName)).toBeTrue();
         });

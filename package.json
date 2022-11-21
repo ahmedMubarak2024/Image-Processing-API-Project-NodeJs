@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/ahmedMubarak2024/Image-Processing-API-Project-NodeJs#readme",
   "devDependencies": {
-    "@types/lodash": "^4.14.189",
     "@types/express": "^4.17.14",
     "@types/jasmine": "^4.3.0",
+    "@types/lodash": "^4.14.189",
     "@types/node": "^18.11.9",
     "@types/sharp": "^0.31.0",
     "@types/supertest": "^2.0.12",

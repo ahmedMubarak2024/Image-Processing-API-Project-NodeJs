@@ -17,23 +17,23 @@ const FileHelpers_1 = require("../FileHelpers");
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 describe("Image Business checkIfImageCacheNotExistCacheIt", () => {
-    it('request image with name fjord should work and find image in images', () => __awaiter(void 0, void 0, void 0, function* () {
+    it("request image with name fjord should work and find image in images", () => __awaiter(void 0, void 0, void 0, function* () {
         let response = yield (0, ImageBussniss_1.checkIfImageCacheNotExistCacheIt)("fjord", undefined, undefined);
         expect(response.state).toEqual(true);
         expect(response.path).toContain("images");
     }));
-    it('request image with name icelandwaterfall should work and find image in ordinal images', () => __awaiter(void 0, void 0, void 0, function* () {
+    it("request image with name icelandwaterfall should work and find image in ordinal images", () => __awaiter(void 0, void 0, void 0, function* () {
         let response = yield (0, ImageBussniss_1.checkIfImageCacheNotExistCacheIt)("icelandwaterfall", NaN, NaN);
         expect(response.state).toEqual(true);
         expect(response.path).toContain("images");
         expect((0, FileHelpers_1.checkIfFileExists)(response.path || "")).toEqual(true);
     }));
-    it('request image with name icelandwaterfall should work and find image in ordinal images', () => __awaiter(void 0, void 0, void 0, function* () {
+    it("request image with name icelandwaterfall should work and find image in ordinal images", () => __awaiter(void 0, void 0, void 0, function* () {
         let response = yield (0, ImageBussniss_1.checkIfImageCacheNotExistCacheIt)("icelandwaterfall", 60, 60);
         expect(response.state).toEqual(true);
         expect(response.path).toContain("thumbnails");
         expect(response.path).toContain("icelandwaterfall-60x60.jpg");
-        expect((0, FileHelpers_1.isCachedVersionExists)('icelandwaterfall-60x60.jpg')).toBe(true);
+        expect((0, FileHelpers_1.isCachedVersionExists)("icelandwaterfall-60x60.jpg")).toBe(true);
     }));
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         if (!fs_1.default.existsSync(FileHelpers_1.thumbnailsPath)) {

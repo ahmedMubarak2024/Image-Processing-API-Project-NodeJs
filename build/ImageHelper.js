@@ -36,7 +36,7 @@ function isNan(width, height) {
 function isCorrectImageSize(width, height) {
     return (!isNanOrNull(width, height) &&
         !isNan(width, height) &&
-        (width >= minSize &&
-            height >= minSize));
+        width >= minSize &&
+        height >= minSize);
 }
 exports.isCorrectImageSize = isCorrectImageSize;
