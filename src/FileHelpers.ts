@@ -1,11 +1,10 @@
 import path from "path";
 import fs from "fs";
 
-import {minSize,maxSize,isCorrectImageSize} from "./ImageHelper"
+import { minSize, maxSize, isCorrectImageSize } from "./ImageHelper";
 
 const imagesPath = path.join(__dirname, "..", "images");
 const thumbnailsPath = path.join(__dirname, "..", "thumbnails");
-
 
 function checkIfFileExists(file: string): boolean {
   return fs.existsSync(file);
@@ -28,16 +27,14 @@ function generateFileName(
   }
 }
 
-
-
 function getFullFileName(fileName: string) {
   return path.resolve(imagesPath, fileName);
 }
 
 function getCachedFullFileName(fileName: string) {
-    if (!fs.existsSync(thumbnailsPath)){
-        fs.mkdirSync(thumbnailsPath);
-    }
+  if (!fs.existsSync(thumbnailsPath)) {
+    fs.mkdirSync(thumbnailsPath);
+  }
   return path.resolve(thumbnailsPath, fileName);
 }
 
@@ -47,5 +44,6 @@ export {
   generateFileName,
   getFullFileName,
   getCachedFullFileName,
-  
+  thumbnailsPath,
+  imagesPath,
 };

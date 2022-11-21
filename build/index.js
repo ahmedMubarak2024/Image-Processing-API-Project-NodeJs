@@ -4,17 +4,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const FileHelpers_1 = require("./FileHelpers");
+const ImageBussniss_1 = require("./ImageBussniss");
 let app = (0, express_1.default)();
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`);
 });
-app.get('/api/images', function (req, res) {
+app.get("/api/images", function (req, res) {
     let imageName = String(req.query.fileName);
-    let width = Number(req.query.width);
-    let height = Number(req.query.height);
+    let width = req.query.width;
+    let height = req.query.height;
     console.log(imageName + " " + width + " " + height);
-    let fullFileName = (0, FileHelpers_1.generateFileName)(imageName, width, height);
-    res.set("Content-Type", "image/jpeg");
-    res.sendFile((0, FileHelpers_1.getFullFileName)(fullFileName));
+    let statues = (0, ImageBussniss_1.checkIfImageCacheNotExistCacheIt)(imageName, width, height);
+    statues.then((result) => {
+        if (result.state) {
+            res.set("Content-Type", "image/jpeg");
+            res.sendFile(result.path || "");
+            console.log(result.path + " success");
+        }
+        else {
+            //res.set("Content-Type", "html/text");
+            res.send(result.error || "");
+            console.log(result.error + " error");
+        }
+    });
 });
