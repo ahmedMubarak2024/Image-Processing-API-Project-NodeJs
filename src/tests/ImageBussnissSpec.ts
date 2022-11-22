@@ -12,7 +12,7 @@ import fs from "fs";
 
 describe("Image Business checkIfImageCacheNotExistCacheIt", () => {
   it("request image with name fjord should work and find image in images", async () => {
-    let response: ImageCheckResponse = await checkIfImageCacheNotExistCacheIt(
+    const response: ImageCheckResponse = await checkIfImageCacheNotExistCacheIt(
       "fjord",
       undefined as any,
       undefined as any
@@ -22,7 +22,7 @@ describe("Image Business checkIfImageCacheNotExistCacheIt", () => {
   });
 
   it("request image with name icelandwaterfall should work and find image in ordinal images", async () => {
-    let response: ImageCheckResponse = await checkIfImageCacheNotExistCacheIt(
+    const response: ImageCheckResponse = await checkIfImageCacheNotExistCacheIt(
       "icelandwaterfall",
       NaN,
       NaN
@@ -33,7 +33,7 @@ describe("Image Business checkIfImageCacheNotExistCacheIt", () => {
   });
 
   it("request image with name icelandwaterfall should work and find image in ordinal images", async () => {
-    let response: ImageCheckResponse = await checkIfImageCacheNotExistCacheIt(
+    const response: ImageCheckResponse = await checkIfImageCacheNotExistCacheIt(
       "icelandwaterfall",
       60,
       60
@@ -48,7 +48,7 @@ describe("Image Business checkIfImageCacheNotExistCacheIt", () => {
     if (!fs.existsSync(thumbnailsPath)) {
       fs.mkdirSync(thumbnailsPath);
     }
-    var writeStream = fs.createWriteStream(
+    const writeStream = fs.createWriteStream(
       path.resolve(thumbnailsPath, "fjord.jpg")
     );
     writeStream.end();

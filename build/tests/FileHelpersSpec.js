@@ -16,12 +16,11 @@ const FileHelpers_1 = require("../FileHelpers");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 describe("FileHelperSpec generateFileName", function () {
-    let foo = 0;
     beforeAll(() => __awaiter(this, void 0, void 0, function* () {
         if (!fs_1.default.existsSync(FileHelpers_1.thumbnailsPath)) {
             fs_1.default.mkdirSync(FileHelpers_1.thumbnailsPath);
         }
-        var writeStream = fs_1.default.createWriteStream(path_1.default.resolve(FileHelpers_1.thumbnailsPath, "fjord.jpg"));
+        const writeStream = fs_1.default.createWriteStream(path_1.default.resolve(FileHelpers_1.thumbnailsPath, "fjord.jpg"));
         writeStream.end();
     }));
     afterAll(() => __awaiter(this, void 0, void 0, function* () {
@@ -34,7 +33,7 @@ describe("FileHelperSpec generateFileName", function () {
         expect((0, FileHelpers_1.generateFileName)("image", NaN, NaN)).toEqual("image.jpg");
     });
     it("when entering no or bad width and bad height we work with the original image name", function () {
-        let s = undefined;
+        const s = undefined;
         expect((0, FileHelpers_1.generateFileName)("image", s, s)).toEqual("image.jpg");
     });
     it("when entering bad width and good height  we work with the original image name", function () {

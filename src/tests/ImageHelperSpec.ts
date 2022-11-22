@@ -58,7 +58,7 @@ describe("ImageHelper::resizeImage", () => {
   });
 
   it("new cached version should be created ", async () => {
-    let cachedFullName = path.join(thumbnailsPath, "icelandwaterfall.jpg");
+    const cachedFullName = path.join(thumbnailsPath, "icelandwaterfall.jpg");
     await resizeImage(imagesPath, cachedFullName, 60, 60).then(() => {
       expect(isCachedVersionExists(cachedFullName)).toBeTrue();
     });

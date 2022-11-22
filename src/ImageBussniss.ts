@@ -7,10 +7,9 @@ import {
 } from "./FileHelpers";
 import {
   resizeImage,
-  maxSize,
-  minSize,
   isCorrectImageSize,
   isNanOrNull,
+  getDetailedErrorMessage,
 } from "./ImageHelper";
 
 interface ImageCheckResponse {
@@ -21,12 +20,12 @@ interface ImageCheckResponse {
 
 function checkIfImageCacheNotExistCacheIt(
   fileName: string,
-  width: number,
-  height: number
+  width: number | string | null,
+  height: number | string | null
 ): Promise<ImageCheckResponse> {
-  return new Promise<ImageCheckResponse>((resolve, reject) => {
-    let realFileName = getFullFileName(generateFileName(fileName, NaN, NaN));
-    let cachedFullName = getCachedFullFileName(
+  return new Promise<ImageCheckResponse>((resolve) => {
+    const realFileName = getFullFileName(generateFileName(fileName, NaN, NaN));
+    const cachedFullName = getCachedFullFileName(
       generateFileName(fileName, width, height)
     );
     if (!checkIfFileExists(realFileName)) {
@@ -43,17 +42,18 @@ function checkIfImageCacheNotExistCacheIt(
     if (!isCorrectImageSize(width, height)) {
       resolve({
         state: false,
-        error:
-          "please Enter Valid Width and Height between" +
-          minSize +
-          ":" +
-          maxSize,
+        error: getDetailedErrorMessage(width, height),
       });
       return;
     }
 
     if (!isCachedVersionExists(cachedFullName)) {
-      resizeImage(realFileName, cachedFullName, width, height).then(() => {
+      resizeImage(
+        realFileName,
+        cachedFullName,
+        width! as number,
+        height! as number
+      ).then(() => {
         if (checkIfFileExists(cachedFullName))
           resolve({ state: true, path: cachedFullName });
         else

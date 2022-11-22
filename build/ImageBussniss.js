@@ -4,9 +4,9 @@ exports.checkIfImageCacheNotExistCacheIt = void 0;
 const FileHelpers_1 = require("./FileHelpers");
 const ImageHelper_1 = require("./ImageHelper");
 function checkIfImageCacheNotExistCacheIt(fileName, width, height) {
-    return new Promise((resolve, reject) => {
-        let realFileName = (0, FileHelpers_1.getFullFileName)((0, FileHelpers_1.generateFileName)(fileName, NaN, NaN));
-        let cachedFullName = (0, FileHelpers_1.getCachedFullFileName)((0, FileHelpers_1.generateFileName)(fileName, width, height));
+    return new Promise((resolve) => {
+        const realFileName = (0, FileHelpers_1.getFullFileName)((0, FileHelpers_1.generateFileName)(fileName, NaN, NaN));
+        const cachedFullName = (0, FileHelpers_1.getCachedFullFileName)((0, FileHelpers_1.generateFileName)(fileName, width, height));
         if (!(0, FileHelpers_1.checkIfFileExists)(realFileName)) {
             let error;
             if (fileName)
@@ -23,10 +23,7 @@ function checkIfImageCacheNotExistCacheIt(fileName, width, height) {
         if (!(0, ImageHelper_1.isCorrectImageSize)(width, height)) {
             resolve({
                 state: false,
-                error: "please Enter Valid Width and Height between" +
-                    ImageHelper_1.minSize +
-                    ":" +
-                    ImageHelper_1.maxSize,
+                error: (0, ImageHelper_1.getDetailedErrorMessage)(width, height),
             });
             return;
         }

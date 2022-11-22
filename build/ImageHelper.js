@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isNanOrNull = exports.isCorrectImageSize = exports.minSize = exports.maxSize = exports.resizeImage = void 0;
+exports.getDetailedErrorMessage = exports.isNanOrNull = exports.isCorrectImageSize = exports.minSize = exports.maxSize = exports.resizeImage = void 0;
 const sharp_1 = __importDefault(require("sharp"));
 const lodash_1 = __importDefault(require("lodash"));
 const maxSize = 3000;
@@ -21,7 +21,7 @@ const minSize = 50;
 exports.minSize = minSize;
 function resizeImage(imagePath, savingPath, width, height) {
     return __awaiter(this, void 0, void 0, function* () {
-        let por = () => (0, sharp_1.default)(imagePath).resize(width, height).toFile(savingPath);
+        const por = () => (0, sharp_1.default)(imagePath).resize(width, height).toFile(savingPath);
         yield por();
     });
 }
@@ -36,7 +36,39 @@ function isNan(width, height) {
 function isCorrectImageSize(width, height) {
     return (!isNanOrNull(width, height) &&
         !isNan(width, height) &&
+        lodash_1.default.isNumber(width) &&
+        lodash_1.default.isNumber(height) &&
         width >= minSize &&
-        height >= minSize);
+        height >= minSize &&
+        width <= maxSize &&
+        height <= maxSize);
 }
 exports.isCorrectImageSize = isCorrectImageSize;
+function checkIsVaild(value) {
+    let error = "";
+    if (lodash_1.default.isNaN(value) || lodash_1.default.isNil(value)) {
+        return (error = "Please enter a VALUE");
+    }
+    else if (!lodash_1.default.isNumber(value)) {
+        return (error = "VALUE [" + value + "] is not a number");
+    }
+    else if (value < minSize || value > maxSize) {
+        return (error =
+            "VALUE  [" + value + "] not between " + minSize + " and " + maxSize);
+    }
+    else
+        return "";
+}
+function getDetailedErrorMessage(width, height) {
+    let errorMessage = "";
+    const checkWidth = checkIsVaild(width);
+    const checkHeight = checkIsVaild(height);
+    if (checkWidth.length > 0) {
+        errorMessage += checkWidth.replace("VALUE", "Width") + ".";
+    }
+    if (checkHeight.length > 0) {
+        errorMessage += checkHeight.replace("VALUE", "Height") + ".";
+    }
+    return errorMessage;
+}
+exports.getDetailedErrorMessage = getDetailedErrorMessage;

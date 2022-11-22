@@ -16,7 +16,7 @@ function checkIfFileExists(file) {
 }
 exports.checkIfFileExists = checkIfFileExists;
 function isCachedVersionExists(fileName) {
-    let imagePath = path_1.default.resolve(thumbnailsPath, fileName);
+    const imagePath = path_1.default.resolve(thumbnailsPath, fileName);
     return checkIfFileExists(imagePath);
 }
 exports.isCachedVersionExists = isCachedVersionExists;

@@ -10,13 +10,11 @@ import fs from "fs";
 import path from "path";
 
 describe("FileHelperSpec generateFileName", function () {
-  let foo: number = 0;
-
   beforeAll(async () => {
     if (!fs.existsSync(thumbnailsPath)) {
       fs.mkdirSync(thumbnailsPath);
     }
-    var writeStream = fs.createWriteStream(
+    const writeStream = fs.createWriteStream(
       path.resolve(thumbnailsPath, "fjord.jpg")
     );
     writeStream.end();
@@ -37,7 +35,7 @@ describe("FileHelperSpec generateFileName", function () {
   });
 
   it("when entering no or bad width and bad height we work with the original image name", function () {
-    let s: number = undefined as any as number;
+    const s: number = undefined as any as number;
     expect(generateFileName("image", s, s)).toEqual("image.jpg");
   });
 
